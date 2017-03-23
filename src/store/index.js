@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react'
 import { applyMiddleware, compose, createStore } from 'redux'
 
 import { makeRootReducer } from './reducer.js'
 import thunk from 'redux-thunk'
 
-export default function configureStore (initialState = {}) {
+export default function configureStore () {
   // ======================================================
   // Middleware Configuration
   // ======================================================
@@ -26,14 +25,17 @@ export default function configureStore (initialState = {}) {
   // ======================================================
   const store = createStore(
     makeRootReducer(),
-    initialState,
-    compose(
-      applyMiddleware(...middleware),
-      ...enhancers
-    )
+    compose(applyMiddleware(...middleware), ...enhancers)
   )
 
   store.asyncReducers = {}
+
+  if (module.hot) {
+    module.hot.accept('./reducer.js', () => {
+      const reducers = require('./reducer.js').default
+      store.replaceReducer(reducers)
+    })
+  } 
 
   return store
 }

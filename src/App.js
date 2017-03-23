@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import logo from './logo.svg';
 
-import Cositas from './containers/Cositas'
+import Categorias from 'containers/Categorias'
 
 import {
   Layout,
@@ -35,24 +35,22 @@ class App extends Component {
     const push = this.context.router.history.push
     
     return (
-      <div style={{height: '300px', position: 'relative'}}>
-          <Layout fixedHeader fixedTabs>
-              <Header>
-                  <HeaderRow title="VicciCompras" />
-                  <HeaderTabs ripple onChange={tab => push(getRouteFromTab[tab])}>
-                      <Tab>Cositas</Tab>
-                      <Tab>Productos</Tab>
-                      <Tab>Changuito</Tab>
-                  </HeaderTabs>
-              </Header>
-              <Drawer title="Title" />
-              <Content>
-                <Route exact path="/cositas" component={Cositas}/>
-                <Route exact path="/productos" component={() => <h1> Productos </h1>}/>
-                <Route exact path="/changuito" component={() => <h1> Changuito </h1>}/>
-              </Content>
-          </Layout>
-      </div>
+        <Layout fixedHeader fixedTabs>
+            <Header>
+                <HeaderRow title="VicciCompras" />
+                <HeaderTabs ripple onChange={tab => push(getRouteFromTab[tab])}>
+                    <Tab>Cositas</Tab>
+                    <Tab>Productos</Tab>
+                    <Tab>Changuito</Tab>
+                </HeaderTabs>
+            </Header>
+            <Drawer title="Title" />
+            <Content>
+              <Route exact path="/cositas" component={Categorias}/>
+              <Route exact path="/productos" component={() => <h1> Productos </h1>}/>
+              <Route exact path="/changuito" component={() => <h1> Changuito </h1>}/>
+            </Content>
+        </Layout>
     );
   }
 }

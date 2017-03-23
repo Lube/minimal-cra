@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import testReducer from './../modules/test/reducer.js'
+import categorias from 'modules/categorias.js'
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
-    testReducer,
+    categorias,
     ...asyncReducers
   })
 }
